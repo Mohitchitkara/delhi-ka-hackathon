@@ -1,0 +1,212 @@
+"use client";
+import React from "react";
+import {AnimatePresence, motion} from "framer-motion";
+import {FaArrowDown} from "react-icons/fa6";
+
+export default function Home():React.JSX.Element {
+    const [isReady, setReady] = React.useState(false);
+    const [language, setLanguage] = React.useState("english");
+    const [dropdownShowing, setDropdownShowing] = React.useState(false);
+    return (
+        <React.Fragment>
+            <motion.div
+                animate={{
+                    left: "-30%"
+                }}
+                initial={{
+                    left: "100%"
+                }}
+                transition={{
+                    duration: 8,
+                }}
+                className={`bg-green-800 h-[35rem] w-[35rem] left-full rounded-full absolute top-1/2 -translate-y-1/2 `}/>
+            <motion.div
+                animate={{
+                    right: "-30%"
+                }}
+                initial={{
+                    right: "100%"
+                }}
+                transition={{
+                    duration: 8,
+                }}
+                className={`bg-white h-[35rem] w-[35rem] right-full rounded-full absolute top-1/2 -translate-y-1/2`}/>
+
+
+            <motion.div
+                initial={{
+                    opacity: 0
+                }}
+                animate={{
+                    opacity: 1
+                }}
+                transition={{
+                    duration: 2,
+                    delay: 6.5
+                }}
+                className={`w-full flex justify-center absolute items-center h-screen`}>
+                <motion.div
+                    animate={{rotate: 360}}
+                    transition={{
+                        duration: 10,
+                        repeat: Infinity,
+                        ease: "linear"
+                    }}
+                    className={`flex justify-between w-[50%] items-center h-[20rem]`}>
+                    <div className={`h-[35rem] w-[35rem] rounded-full bg-green-800`}/>
+                    <div className={`h-[35rem] w-[35rem] rounded-full bg-white`}/>
+                </motion.div>
+            </motion.div>
+
+
+            <div
+                onClick={() => setDropdownShowing(!dropdownShowing)}
+                className={` items-center gap-[1rem] text-white underline p-4 rounded-xl absolute top-[1rem] left-[1rem] z-[1000] text-[1.5rem] flex`}>
+                Language
+
+                <motion.div animate={{rotate: dropdownShowing ? 180 : 0}}>
+                    <FaArrowDown />
+                </motion.div>
+            </div>
+
+
+            <AnimatePresence>
+                {
+                    dropdownShowing &&
+                    <motion.div
+                        animate={{opacity: 1, y: 0}}
+                        initial={{opacity: 0, y: -50}}
+                        exit={{opacity: 0, y: 50}}
+                        onClick={() => setLanguage("english")}
+                        className={`bg-[rgba(255,255,255,0.35)] text-white  p-4 rounded-xl  absolute z-[1000] left-[1rem] top-[7rem] px-[2.9rem] text-[1.5rem]`}>English
+                    </motion.div>
+                }
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {
+                    dropdownShowing &&
+                    <motion.div
+                        animate={{opacity: 1, y: 0}}
+                        initial={{opacity: 0, y: -50}}
+                        exit={{opacity: 0, y: 50}}
+                        transition={{delay: 0.05}}
+                        onClick={() => setLanguage("punjabi")}
+                        className={`bg-[rgba(255,255,255,0.35)]  p-4 rounded-xl text-white absolute z-[1000] left-[1rem] top-[12rem] px-[2.9rem] text-[1.5rem]`}>Punjabi
+                    </motion.div>
+                }
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {
+                    dropdownShowing &&
+                    <motion.div
+                        animate={{opacity: 1, y: 0}}
+                        initial={{opacity: 0, y: -50}}
+                        exit={{opacity: 0, y: 50}}
+                        transition={{delay: 0.1}}
+                        onClick={() => setLanguage("hindi")}
+                        className={`bg-[rgba(255,255,255,0.35)]  py-4 rounded-xl text-white absolute z-[1000] left-[1rem] top-[17rem] px-[3.7rem] text-[1.5rem]`}>Hindi
+                    </motion.div>
+                }
+            </AnimatePresence>
+            <main
+                className={`absolute overflow-hidden z-[10] top-0 left-0 w-screen h-[300vh] flex justify-start pt-[10rem] flex-col items-center min-w-screen blur_it300`}>
+                <motion.h1
+                    className={`text-white text-[12rem] font-bold`}>
+                    {language === "hindi" ? "हलचल" : language === "punjabi" ? "ਹਲਚਲ" : "HALCHALL"}
+                </motion.h1>
+                <motion.h1
+                    animate={{
+                        opacity: 1
+                    }}
+                    initial={{
+                        opacity: 0
+                    }}
+                    transition={{
+                        duration: 2,
+                        delay: 3
+                    }}
+                    className={`text-white text-[3rem] font-bold`}>
+                    {language === "punjabi" ? "ਜਿੱਥੇ ਖੇਤੀ ਨਵੀਨਤਾ ਨੂੰ ਪੂਰਾ ਕਰਦੀ ਹੈ" : language === "english" ? "Where Agriculture Meets Innovation" : "जहां कृषि नवाचार से मिलती है"}
+                </motion.h1>
+                <h1 onClick={() => setReady(true)}
+                    className={`text-[2rem] cursor-default hover:bg-transparent hover:text-white border-2 border-white transition-all duration-700 shadow-2xl shadow-black hover:shadow-white p-4 rounded-xl flex items-center gap-[1.5rem] bg-white mt-[3rem] text-black `}>
+                    Show For More
+                    <FaArrowDown/>
+                </h1>
+            </main>
+
+            <AnimatePresence>
+                {isReady &&
+                    <motion.div
+                        animate={{
+                            opacity: 1
+                        }}
+                        initial={{
+                            opacity: 0
+                        }}
+                        exit={{
+                            opacity: 0
+                        }}
+                        transition={{
+                            duration: 1.5,
+                            ease: [0.83, 0, 0.17, 1]
+                        }}
+                        className={`bg-[#1c1c1c] p-[5rem] w-screen overflow-hidden h-screen absolute top-0 left-0 z-[100]`}>
+
+                        <motion.div
+                            animate={{
+                                opacity: 1
+                            }}
+                            initial={{
+                                opacity: 0
+                            }}
+                            transition={{
+                                duration: 1.5,
+                                ease: [0.83, 0, 0.17, 1],
+                                delay: 1.5
+                            }}
+                        >
+                            <h1 className={`text-white font-bold text-[4rem]`}>HalChall
+                                <div className={`w-full h-[10px] rounded-full bg-white`}/>
+                            </h1>
+
+                            <p className={`text-white font-light text-[3rem] text-justify mt-[6rem]`}>
+                                Halchal, your agricultural growth catalyst! We empower farmers to unlock their full
+                                potential with innovative solutions. From precision farming to sustainable practices, we
+                                guide you towards abundant harvests. Join us in cultivating prosperity and transforming
+                                agriculture. Halchal—where every seed sows the promise of a thriving future!
+                            </p>
+
+                            <div className={`flex justify-center items-center text-[2.5rem]`}>
+                                <div
+                                    className={`border-2 p-2 flex justify-center items-center rounded-xl  gap-[6rem] mt-[6rem] border-white`}>
+                                    <div
+                                        onClick={() => window.location.assign("/dashboard")}
+                                        className={`text-white border-2 border-white p-4 rounded-xl hover:bg-white hover:text-black`}>Services
+                                    </div>
+                                    <div
+                                        onClick={() => window.location.assign("/aboutus")}
+                                        className={`text-white border-2 border-white p-4 rounded-xl hover:bg-white hover:text-black`}>About
+                                        Us
+                                    </div>
+                                    <div
+                                        onClick={() => window.location.assign("/regpage")}
+                                        className={`text-white border-2 border-white p-4 rounded-xl hover:bg-white hover:text-black`}>LogIn/SignUp
+                                    </div>
+                                    <div
+                                        onClick={() => setReady(false)}
+                                        className={`text-white border-2 border-white p-4 rounded-xl hover:bg-white hover:text-black`}>Back
+                                    </div>
+
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                }
+            </AnimatePresence>
+
+        </React.Fragment>
+    );
+}
